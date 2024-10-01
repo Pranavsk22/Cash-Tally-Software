@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT Type="Advanced Installer" CreateVersion="21.8.2" version="21.8.2" Modules="simple" RootPath="." Language="en" Id="{F1FC3FC3-E558-40AB-A529-3F9369850F5E}">
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
+    <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
+    <ROW Property="ALLUSERS" Value="1"/>
+    <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
+    <ROW Property="ARPPRODUCTICON" Value="Cashtally_icon.exe" Type="8"/>
+    <ROW Property="ARPURLINFOABOUT" Value="Go to github Page"/>
+    <ROW Property="Manufacturer" Value="Eskay"/>
+    <ROW Property="ProductCode" Value="1033:{3F95E981-6369-4E3B-B032-153BC63FBB68} " Type="16"/>
+    <ROW Property="ProductLanguage" Value="1033"/>
+    <ROW Property="ProductName" Value="Cash Tally"/>
+    <ROW Property="ProductVersion" Value="3.0.0" Options="32"/>
+    <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
+    <ROW Property="UpgradeCode" Value="{95BB70AA-8509-4A30-B537-A067537BE890}"/>
+    <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsType9XDisplay" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT40" MultiBuildValue="DefaultBuild:Windows NT 4.0" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT40Display" MultiBuildValue="DefaultBuild:Windows NT 4.0" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT50" MultiBuildValue="DefaultBuild:Windows 2000" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT50Display" MultiBuildValue="DefaultBuild:Windows 2000" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT5X" MultiBuildValue="DefaultBuild:Windows XP/2003" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT5XDisplay" MultiBuildValue="DefaultBuild:Windows XP/2003" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT60" MultiBuildValue="DefaultBuild:Windows Vista/Server 2008" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT60Display" MultiBuildValue="DefaultBuild:Windows Vista/Server 2008" ValueLocId="-"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
+    <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1"/>
+    <ROW Directory="Css_Dir" Directory_Parent="APPDIR" DefaultDir="Css"/>
+    <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="DESKTO~1|DesktopFolder" IsPseudoRoot="1"/>
+    <ROW Directory="GoogleAppsScript_Dir" Directory_Parent="APPDIR" DefaultDir="GOOGLE~1|Google AppsScript"/>
+    <ROW Directory="Html_Dir" Directory_Parent="APPDIR" DefaultDir="Html"/>
+    <ROW Directory="Javascript_Dir" Directory_Parent="APPDIR" DefaultDir="JAVASC~1|Javascript"/>
+    <ROW Directory="Logo_Dir" Directory_Parent="Css_Dir" DefaultDir="Logo"/>
+    <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.SideBySideGuidComponent">
+    <ROW Component="APPDIR" Value="{E896DFC1-C61D-4AA7-A517-1EDF1F49B09C}"/>
+    <ROW Component="ProductInformation" Value="{39C2FE7F-CF85-4218-B02E-0D51E1632C81}"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
+    <ROW Component="APPDIR" ComponentId="{E896DFC1-C61D-4AA7-A517-1EDF1F49B09C}" Directory_="APPDIR" Attributes="0"/>
+    <ROW Component="Backup_code_v1.3.gs.txt" ComponentId="{CD10AE13-D8C7-45D8-9F55-BE1AC8903F92}" Directory_="GoogleAppsScript_Dir" Attributes="0" KeyPath="Backup_code_v1.3.gs.txt" Type="0"/>
+    <ROW Component="Calc_script_v1.5.js" ComponentId="{4A180A39-B783-4B67-AEBF-3692D83ED231}" Directory_="Javascript_Dir" Attributes="0" KeyPath="Calc_script_v1.5.js" Type="0"/>
+    <ROW Component="Cashtally_icon.ico" ComponentId="{F31BC363-1121-4A7A-8E48-B956BDAFDE09}" Directory_="Logo_Dir" Attributes="0" KeyPath="Cashtally_icon.ico" Type="0"/>
+    <ROW Component="Index_style_v1.5.css" ComponentId="{6100EDF6-1EDD-43A2-BF0A-34643D9A804B}" Directory_="Css_Dir" Attributes="0" KeyPath="Index_style_v1.5.css" Type="0"/>
+    <ROW Component="Index_v1.5.html" ComponentId="{E410D25E-6EF8-4301-944F-03CBE55453A4}" Directory_="Html_Dir" Attributes="0" KeyPath="Index_v1.5.html" Type="0"/>
+    <ROW Component="ProductInformation" ComponentId="{39C2FE7F-CF85-4218-B02E-0D51E1632C81}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
+    <ROW Component="Readme.txt" ComponentId="{DB2F2528-95D1-4DA0-A59F-E155D113043E}" Directory_="APPDIR" Attributes="0" KeyPath="Readme.txt" Type="0"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
+    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0"/>
+    <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
+    <ROW File="Index_v1.5.html" Component_="Index_v1.5.html" FileName="INDEX_~1.HTM|Index_v1.5.html" Attributes="0" SourcePath="..\..\Github Projects\Cashtally_git\Bangalore\Html\Index_v1.5.html" SelfReg="false"/>
+    <ROW File="Upd_del_v1.5.html" Component_="Index_v1.5.html" FileName="UPD_DE~1.HTM|Upd_del_v1.5.html" Attributes="0" SourcePath="..\..\Github Projects\Cashtally_git\Bangalore\Html\Upd_del_v1.5.html" SelfReg="false"/>
+    <ROW File="Index_style_v1.5.css" Component_="Index_style_v1.5.css" FileName="INDEX_~1.CSS|Index_style_v1.5.css" Attributes="0" SourcePath="..\..\Github Projects\Cashtally_git\Bangalore\Css\Index_style_v1.5.css" SelfReg="false"/>
+    <ROW File="Upd_del_style_v1.5.css" Component_="Index_style_v1.5.css" FileName="UPD_DE~1.CSS|Upd_del_style_v1.5.css" Attributes="0" SourcePath="..\..\Github Projects\Cashtally_git\Bangalore\Css\Upd_del_style_v1.5.css" SelfReg="false"/>
+    <ROW File="Cashtally_icon.ico" Component_="Cashtally_icon.ico" FileName="CASHTA~1.ICO|Cashtally_icon.ico" Attributes="0" SourcePath="..\..\Github Projects\Cashtally_git\Bangalore\Css\Logo\Cashtally_icon.ico" SelfReg="false"/>
+    <ROW File="Cashtally_logo.png" Component_="Cashtally_icon.ico" FileName="CASHTA~1.PNG|Cashtally_logo.png" Attributes="0" SourcePath="..\..\Github Projects\Cashtally_git\Bangalore\Css\Logo\Cashtally_logo.png" SelfReg="false"/>
+    <ROW File="Calc_script_v1.5.js" Component_="Calc_script_v1.5.js" FileName="CALC_S~1.JS|Calc_script_v1.5.js" Attributes="0" SourcePath="..\..\Github Projects\Cashtally_git\Bangalore\Javascript\Calc_script_v1.5.js" SelfReg="false"/>
+    <ROW File="Op_bal_script_v1.5.js" Component_="Calc_script_v1.5.js" FileName="OP_BAL~1.JS|Op_bal_script_v1.5.js" Attributes="0" SourcePath="..\..\Github Projects\Cashtally_git\Bangalore\Javascript\Op_bal_script_v1.5.js" SelfReg="false"/>
+    <ROW File="Save_changes_v1.5.js" Component_="Calc_script_v1.5.js" FileName="SAVE_C~1.JS|Save_changes_v1.5.js" Attributes="0" SourcePath="..\..\Github Projects\Cashtally_git\Bangalore\Javascript\Save_changes_v1.5.js" SelfReg="false"/>
+    <ROW File="Search_records_v1.5.js" Component_="Calc_script_v1.5.js" FileName="SEARCH~1.JS|Search_records_v1.5.js" Attributes="0" SourcePath="..\..\Github Projects\Cashtally_git\Bangalore\Javascript\Search_records_v1.5.js" SelfReg="false"/>
+    <ROW File="Backup_code_v1.3.gs.txt" Component_="Backup_code_v1.3.gs.txt" FileName="BACKUP~1.TXT|Backup_code_v1.3.gs.txt" Attributes="0" SourcePath="..\..\Github Projects\Cashtally_git\Bangalore\Google AppsScript\Backup_code_v1.3.gs.txt" SelfReg="false"/>
+    <ROW File="Backup_code_v1.4.gs.txt" Component_="Backup_code_v1.3.gs.txt" FileName="BACKUP~2.TXT|Backup_code_v1.4.gs.txt" Attributes="0" SourcePath="..\..\Github Projects\Cashtally_git\Bangalore\Google AppsScript\Backup_code_v1.4.gs.txt" SelfReg="false"/>
+    <ROW File="Fetch_clbal_code_v1.3.gs.txt" Component_="Backup_code_v1.3.gs.txt" FileName="FETCH_~1.TXT|Fetch_clbal_code_v1.3.gs.txt" Attributes="0" SourcePath="..\..\Github Projects\Cashtally_git\Bangalore\Google AppsScript\Fetch_clbal_code_v1.3.gs.txt" SelfReg="false"/>
+    <ROW File="Fetch_Sno_code_v1.3.gs.txt" Component_="Backup_code_v1.3.gs.txt" FileName="FETCH_~2.TXT|Fetch_Sno_code_v1.3.gs.txt" Attributes="0" SourcePath="..\..\Github Projects\Cashtally_git\Bangalore\Google AppsScript\Fetch_Sno_code_v1.3.gs.txt" SelfReg="false"/>
+    <ROW File="Search_records_code_v1.3.gs.txt" Component_="Backup_code_v1.3.gs.txt" FileName="SEARCH~1.TXT|Search_records_code_v1.3.gs.txt" Attributes="0" SourcePath="..\..\Github Projects\Cashtally_git\Bangalore\Google AppsScript\Search_records_code_v1.3.gs.txt" SelfReg="false"/>
+    <ROW File="Submit_code_v1.3.gs.txt" Component_="Backup_code_v1.3.gs.txt" FileName="SUBMIT~1.TXT|Submit_code_v1.3.gs.txt" Attributes="0" SourcePath="..\..\Github Projects\Cashtally_git\Bangalore\Google AppsScript\Submit_code_v1.3.gs.txt" SelfReg="false"/>
+    <ROW File="Readme.txt" Component_="Readme.txt" FileName="Readme.txt" Attributes="0" SourcePath="..\..\Github Projects\Cashtally_git\Bangalore\Readme.txt" SelfReg="false"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
+    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" Languages="en" InstallationType="4" UseLargeSchema="true"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
+    <ROW Path="&lt;AI_DICTS&gt;ui.ail"/>
+    <ROW Path="&lt;AI_DICTS&gt;ui_en.ail"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.FragmentComponent">
+    <ROW Fragment="CommonUI.aip" Path="&lt;AI_FRAGS&gt;CommonUI.aip"/>
+    <ROW Fragment="FolderDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\FolderDlg.aip"/>
+    <ROW Fragment="MaintenanceTypeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\MaintenanceTypeDlg.aip"/>
+    <ROW Fragment="MaintenanceWelcomeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\MaintenanceWelcomeDlg.aip"/>
+    <ROW Fragment="SequenceDialogs.aip" Path="&lt;AI_THEMES&gt;classic\fragments\SequenceDialogs.aip"/>
+    <ROW Fragment="Sequences.aip" Path="&lt;AI_FRAGS&gt;Sequences.aip"/>
+    <ROW Fragment="StaticUIStrings.aip" Path="&lt;AI_FRAGS&gt;StaticUIStrings.aip"/>
+    <ROW Fragment="Themes.aip" Path="&lt;AI_FRAGS&gt;Themes.aip"/>
+    <ROW Fragment="UI.aip" Path="&lt;AI_THEMES&gt;classic\fragments\UI.aip"/>
+    <ROW Fragment="Validation.aip" Path="&lt;AI_FRAGS&gt;Validation.aip"/>
+    <ROW Fragment="VerifyRemoveDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\VerifyRemoveDlg.aip"/>
+    <ROW Fragment="VerifyRepairDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\VerifyRepairDlg.aip"/>
+    <ROW Fragment="WelcomeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\WelcomeDlg.aip"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiBinaryComponent">
+    <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiControlEventComponent">
+    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="FolderDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_INSTALL" Ordering="201"/>
+    <ROW Dialog_="FolderDlg" Control_="Back" Event="NewDialog" Argument="WelcomeDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="MaintenanceWelcomeDlg" Control_="Next" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT" Ordering="99"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_MAINT" Ordering="198"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="CustomizeDlg" Condition="AI_MAINT" Ordering="202"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_INSTALL" Ordering="197"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="201"/>
+    <ROW Dialog_="CustomizeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_MAINT" Ordering="101"/>
+    <ROW Dialog_="CustomizeDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="ChangeButton" Event="NewDialog" Argument="CustomizeDlg" Condition="AI_MAINT" Ordering="501"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceWelcomeDlg" Condition="AI_MAINT" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="RemoveButton" Event="NewDialog" Argument="VerifyRemoveDlg" Condition="AI_MAINT AND InstallMode=&quot;Remove&quot;" Ordering="601"/>
+    <ROW Dialog_="VerifyRemoveDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT AND InstallMode=&quot;Remove&quot;" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="RepairButton" Event="NewDialog" Argument="VerifyRepairDlg" Condition="AI_MAINT AND InstallMode=&quot;Repair&quot;" Ordering="601"/>
+    <ROW Dialog_="VerifyRepairDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT AND InstallMode=&quot;Repair&quot;" Ordering="1"/>
+    <ROW Dialog_="VerifyRepairDlg" Control_="Repair" Event="EndDialog" Argument="Return" Condition="AI_MAINT AND InstallMode=&quot;Repair&quot;" Ordering="399" Options="1"/>
+    <ROW Dialog_="VerifyRemoveDlg" Control_="Remove" Event="EndDialog" Argument="Return" Condition="AI_MAINT AND InstallMode=&quot;Remove&quot;" Ordering="299" Options="1"/>
+    <ROW Dialog_="PatchWelcomeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_PATCH" Ordering="201"/>
+    <ROW Dialog_="ResumeDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_RESUME" Ordering="299"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_PATCH" Ordering="199"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="PatchWelcomeDlg" Condition="AI_PATCH" Ordering="203"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCreateFolderComponent">
+    <ROW Directory_="APPDIR" Component_="APPDIR" ManualDelete="true"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
+    <ROW Action="AI_DOWNGRADE" Type="19" Target="4010"/>
+    <ROW Action="AI_DpiContentScale" Type="1" Source="aicustact.dll" Target="DpiContentScale"/>
+    <ROW Action="AI_EnableDebugLog" Type="321" Source="aicustact.dll" Target="EnableDebugLog"/>
+    <ROW Action="AI_InstallModeCheck" Type="1" Source="aicustact.dll" Target="UpdateInstallMode" WithoutSeq="true"/>
+    <ROW Action="AI_PREPARE_UPGRADE" Type="65" Source="aicustact.dll" Target="PrepareUpgrade"/>
+    <ROW Action="AI_PRESERVE_INSTALL_TYPE" Type="65" Source="aicustact.dll" Target="PreserveInstallType"/>
+    <ROW Action="AI_RESTORE_LOCATION" Type="65" Source="aicustact.dll" Target="RestoreLocation"/>
+    <ROW Action="AI_ResolveKnownFolders" Type="1" Source="aicustact.dll" Target="AI_ResolveKnownFolders"/>
+    <ROW Action="AI_SHOW_LOG" Type="65" Source="aicustact.dll" Target="LaunchLogFile" WithoutSeq="true"/>
+    <ROW Action="AI_STORE_LOCATION" Type="51" Source="ARPINSTALLLOCATION" Target="[APPDIR]"/>
+    <ROW Action="SET_APPDIR" Type="307" Source="APPDIR" Target="[ProgramFilesFolder][Manufacturer]\[ProductName]" MultiBuildTarget="DefaultBuild:[ProgramFilesFolder]\[Manufacturer]\[ProductName]"/>
+    <ROW Action="SET_SHORTCUTDIR" Type="307" Source="SHORTCUTDIR" Target="[ProgramMenuFolder][ProductName]"/>
+    <ROW Action="SET_TARGETDIR_TO_APPDIR" Type="51" Source="TARGETDIR" Target="[APPDIR]"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatCompsComponent">
+    <ROW Feature_="MainFeature" Component_="APPDIR"/>
+    <ROW Feature_="MainFeature" Component_="ProductInformation"/>
+    <ROW Feature_="MainFeature" Component_="Index_v1.5.html"/>
+    <ROW Feature_="MainFeature" Component_="Index_style_v1.5.css"/>
+    <ROW Feature_="MainFeature" Component_="Cashtally_icon.ico"/>
+    <ROW Feature_="MainFeature" Component_="Readme.txt"/>
+    <ROW Feature_="MainFeature" Component_="Calc_script_v1.5.js"/>
+    <ROW Feature_="MainFeature" Component_="Backup_code_v1.3.gs.txt"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
+    <ROW Name="Cashtally_icon.exe" SourcePath="..\..\Github Projects\Cashtally_git\Bangalore\Css\Logo\Cashtally_icon.ico" Index="0"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
+    <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
+    <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
+    <ROW Action="AI_STORE_LOCATION" Condition="(Not Installed) OR REINSTALL" Sequence="1501"/>
+    <ROW Action="AI_PREPARE_UPGRADE" Condition="AI_UPGRADE=&quot;No&quot; AND (Not Installed)" Sequence="1399"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="52"/>
+    <ROW Action="AI_EnableDebugLog" Sequence="51"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiInstallUISequenceComponent">
+    <ROW Action="AI_PRESERVE_INSTALL_TYPE" Sequence="199"/>
+    <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="53"/>
+    <ROW Action="AI_DpiContentScale" Sequence="52"/>
+    <ROW Action="AI_EnableDebugLog" Sequence="51"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiLaunchConditionsComponent">
+    <ROW Condition="((VersionNT &lt;&gt; 501) AND (VersionNT &lt;&gt; 502))" Description="[ProductName] cannot be installed on [WindowsTypeNT5XDisplay]." DescriptionLocId="AI.LaunchCondition.NoNT5X" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="(VersionNT &lt;&gt; 400)" Description="[ProductName] cannot be installed on [WindowsTypeNT40Display]." DescriptionLocId="AI.LaunchCondition.NoNT40" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="(VersionNT &lt;&gt; 500)" Description="[ProductName] cannot be installed on [WindowsTypeNT50Display]." DescriptionLocId="AI.LaunchCondition.NoNT50" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="(VersionNT &lt;&gt; 600)" Description="[ProductName] cannot be installed on [WindowsTypeNT60Display]." DescriptionLocId="AI.LaunchCondition.NoNT60" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="VersionNT" Description="[ProductName] cannot be installed on [WindowsType9XDisplay]." DescriptionLocId="AI.LaunchCondition.No9X" IsPredefined="true" Builds="DefaultBuild"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiRegsComponent">
+    <ROW Registry="Manufacturer" Root="-1" Key="Software\[Manufacturer]" Name="\"/>
+    <ROW Registry="Path" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Path" Value="[APPDIR]" Component_="ProductInformation"/>
+    <ROW Registry="ProductName" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="\"/>
+    <ROW Registry="Software" Root="-1" Key="Software" Name="\"/>
+    <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
+    <ROW Shortcut="Index_v1.5" Directory_="DesktopFolder" Name="Index_v1.5" Component_="Index_v1.5.html" Target="[#Index_v1.5.html]" Hotkey="0" Icon_="Cashtally_icon.exe" IconIndex="0" ShowCmd="1" WkDir="Html_Dir"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
+    <ATTRIBUTE name="UsedTheme" value="classic"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiUpgradeComponent">
+    <ROW UpgradeCode="[|UpgradeCode]" VersionMin="0.0.1" VersionMax="[|ProductVersion]" Attributes="257" ActionProperty="OLDPRODUCTS"/>
+    <ROW UpgradeCode="[|UpgradeCode]" VersionMin="[|ProductVersion]" Attributes="2" ActionProperty="AI_NEWERPRODUCTFOUND"/>
+  </COMPONENT>
+</DOCUMENT>
