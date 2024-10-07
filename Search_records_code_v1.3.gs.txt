@@ -1,0 +1,71 @@
+function doGet(e) {
+    if (!e || !e.parameter || !e.parameter.date) {
+        return ContentService.createTextOutput(JSON.stringify({ success: false, message: "No date parameter provided" }))
+                              .setMimeType(ContentService.MimeType.JSON);
+    }
+    
+    var inputDate = e.parameter.date;
+    var ss=SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ss.getSheetByName('Cashtally');
+    //var sheetID=ss.getSheetID();
+    var data = sheet.getDataRange().getValues();
+    var matchingRecords = [];
+
+    // Iterate through all rows and collect matching records
+    for (var i = 1; i < data.length; i++) {
+        var sheetDate = new Date(data[i][1]);
+        if (formatDate(sheetDate) === inputDate) {
+            matchingRecords.push(data[i]);
+        }
+    }
+
+    // Handle cases based on the number of matching records
+    if (matchingRecords.length === 0) {
+        return ContentService.createTextOutput(JSON.stringify({ success: false, message: "No record found for the provided date" }))
+                              .setMimeType(ContentService.MimeType.JSON);
+    } else if (matchingRecords.length > 1) {
+        return ContentService.createTextOutput(JSON.stringify({ success: false, message: "Multiple records found for the provided date" }))
+                              .setMimeType(ContentService.MimeType.JSON);
+    } else {
+        var record = matchingRecords[0];
+        var result = {
+            S_NO: record[0],
+            OpeningBalance: record[2],
+            Sales: record[3],
+            OnlineSales: record[4],
+            GPay: record[5],
+            Cheque: record[6],
+            CreditCard: record[7],
+            Expenses: record[8],
+            SareeChit: record[9],
+            Bank1: record[10],
+            Bank2: record[11],
+            Bank3: record[12],
+            TotalDeductions: record[13],
+            ExcessOrShortage: record[14],
+            Cash_2000: record[15],
+            Cash_500: record[16],
+            Cash_200: record[17],
+            Cash_100: record[18],
+            Cash_50: record[19],
+            Cash_20: record[20],
+            Cash_10: record[21],
+            Cash_5: record[22],
+            Cash_2: record[23],
+            Cash_1: record[24],
+            TotalCurrency: record[25],
+            Counter2: record[26],
+            ClosingBalance: record[27]
+        };
+
+        return ContentService.createTextOutput(JSON.stringify({ success: true, result: result }))
+                              .setMimeType(ContentService.MimeType.JSON);
+    }
+}
+
+function formatDate(date) {
+    var day = ('0' + date.getDate()).slice(-2);
+    var month = ('0' + (date.getMonth() + 1)).slice(-2);
+    var year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}

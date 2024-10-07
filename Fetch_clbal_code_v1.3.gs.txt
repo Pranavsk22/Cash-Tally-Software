@@ -1,0 +1,37 @@
+function doGet(e) {
+    if (!e || !e.parameter || !e.parameter.date) {
+        return ContentService.createTextOutput(JSON.stringify({ success: false, message: "No date parameter provided" }))
+                              .setMimeType(ContentService.MimeType.JSON);
+    }
+    
+    var date = e.parameter.date;
+    var ss= SpreadsheetApp.getActiveSpreadsheet();
+    var sheet= ss.getSheetByName('Cashtally'); // Replace with your sheet details
+    //var sheetID = sheet.getSheetId(); 
+    var data = sheet.getDataRange().getValues();
+
+    var closingBalance = null;
+
+    // Loop through data in reverse to find the most recent previous closing balance
+    for (var i = data.length - 1; i >= 1; i--) {
+        if (formatDate(data[i][1]) === date) {
+            closingBalance = data[i][data[i].length - 1]; // Assuming closing balance is in the last column
+            break;
+        }
+    }
+
+    if (closingBalance !== null) {
+        return ContentService.createTextOutput(JSON.stringify({ success: true, result: { ClosingBalance: closingBalance } }))
+                              .setMimeType(ContentService.MimeType.JSON);
+    }
+    
+    return ContentService.createTextOutput(JSON.stringify({ success: false, result: {} }))
+                          .setMimeType(ContentService.MimeType.JSON);
+}
+
+function formatDate(date) {
+    var day = ('0' + date.getDate()).slice(-2);
+    var month = ('0' + (date.getMonth() + 1)).slice(-2);
+    var year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}

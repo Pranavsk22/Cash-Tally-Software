@@ -1,0 +1,235 @@
+var sheetName = 'Cashtally'
+var scriptProp = PropertiesService.getScriptProperties()
+
+function initialSetup () {
+  var activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
+  scriptProp.setProperty('key', activeSpreadsheet.getId())
+}
+
+function doPost (e) {
+  var lock = LockService.getScriptLock()
+  lock.tryLock(10000)
+
+  try {
+    var doc = SpreadsheetApp.openById(scriptProp.getProperty('key'))
+    var sheet = doc.getSheetByName(sheetName)
+    var data = sheet.getDataRange().getValues();
+
+    var newRecord = {};
+    for (var key in e.parameter) {
+      if (e.parameter.hasOwnProperty(key)) {
+        newRecord[key] = e.parameter[key];
+      }
+    }
+
+    var inputDate = new Date(newRecord['Date']);
+    var inputS_NO = parseInt(newRecord['S_NO'], 10);
+
+    // Find and delete old records with the same date but a smaller S_NO
+    for (var i = data.length - 1; i >= 1; i--) {
+      var rowDate = new Date(data[i][1]);
+      var rowS_NO = parseInt(data[i][0], 10);
+      if (formatDate(rowDate) === formatDate(inputDate) && rowS_NO < inputS_NO) {
+        sheet.deleteRow(i + 1); // Adjust for zero-indexing
+      }
+    }
+
+    var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
+    var newRow = headers.map(function(header) {
+      return newRecord[header] || '';
+    })
+
+    sheet.appendRow(newRow)
+    dateformat();//formatting the date as dd-mm-yyyy
+    activateprintsheet();//activating Print sheet
+    print_populater();//populating data values in print sheet
+    settingdateinprint();
+    getPDFUrl();//saving as pdf
+    hidingsheet();
+    datesort();//sorting by date
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'result': 'success', 'row': newRow }))
+      .setMimeType(ContentService.MimeType.JSON)
+  }
+
+  catch (error) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'result': 'error', 'error': error }))
+      .setMimeType(ContentService.MimeType.JSON)
+  }
+
+  finally {
+    lock.releaseLock()
+  }
+}
+
+function formatDate(date) {
+    var day = ('0' + date.getDate()).slice(-2);
+    var month = ('0' + (date.getMonth() + 1)).slice(-2);
+    var year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
+function datesort() {
+  var spreadsheet = SpreadsheetApp.getActive();
+  spreadsheet.getRange('A1:AB1').activate();
+  var currentCell = spreadsheet.getCurrentCell();
+  spreadsheet.getSelection().getNextDataRange(SpreadsheetApp.Direction.DOWN).activate();
+  currentCell.activateAsCurrentCell();
+  currentCell = spreadsheet.getCurrentCell();
+  spreadsheet.getSelection().getNextDataRange(SpreadsheetApp.Direction.DOWN).activate();
+  currentCell.activateAsCurrentCell();
+  spreadsheet.getActiveRange().offset(1, 0, spreadsheet.getActiveRange().getNumRows() - 1).sort({column: 2, ascending: false});
+};
+
+function print_populater(){
+	//Getting values of Cashtally sheet
+	var ss_1=SpreadsheetApp.getActiveSpreadsheet();
+	var sheet_Cashtally=ss_1.getSheetByName("Cashtally");
+  var lastRow = sheet_Cashtally.getLastRow();
+	var ss_2=SpreadsheetApp.getActiveSpreadsheet();
+	var sheet_Print=ss_2.getSheetByName("Print");
+	var value_date=sheet_Cashtally.getRange('B'+lastRow).getValue();
+	var value_opbal=sheet_Cashtally.getRange('C'+lastRow).getValue();
+	var value_sale=sheet_Cashtally.getRange('D'+lastRow).getValue();
+	var value_osale=sheet_Cashtally.getRange('E'+lastRow).getValue();
+	var value_gpay=sheet_Cashtally.getRange('F'+lastRow).getValue();
+	var value_cheq=sheet_Cashtally.getRange('G'+lastRow).getValue();
+	var value_cred=sheet_Cashtally.getRange('H'+lastRow).getValue();
+	var value_expense=sheet_Cashtally.getRange('I'+lastRow).getValue();
+	var value_sareechit=sheet_Cashtally.getRange('J'+lastRow).getValue();
+	var value_bank1=sheet_Cashtally.getRange('K'+lastRow).getValue();
+	var value_bank2=sheet_Cashtally.getRange('L'+lastRow).getValue();
+	var value_bank3=sheet_Cashtally.getRange('M'+lastRow).getValue();
+	var value_totalded=sheet_Cashtally.getRange('N'+lastRow).getValue();
+	var value_exc=sheet_Cashtally.getRange('O'+lastRow).getValue();
+	var value_m2000=sheet_Cashtally.getRange('P'+lastRow).getValue();
+	var value_m500=sheet_Cashtally.getRange('Q'+lastRow).getValue();
+	var value_m200=sheet_Cashtally.getRange('R'+lastRow).getValue();
+	var value_m100=sheet_Cashtally.getRange('S'+lastRow).getValue();
+	var value_m50=sheet_Cashtally.getRange('T'+lastRow).getValue();
+	var value_m20=sheet_Cashtally.getRange('U'+lastRow).getValue();
+	var value_m10=sheet_Cashtally.getRange('V'+lastRow).getValue();
+	var value_m5=sheet_Cashtally.getRange('W'+lastRow).getValue();
+	var value_m2=sheet_Cashtally.getRange('X'+lastRow).getValue();
+	var value_m1=sheet_Cashtally.getRange('Y'+lastRow).getValue();
+	var value_totcur=sheet_Cashtally.getRange('Z'+lastRow).getValue();
+	var value_ctr2=sheet_Cashtally.getRange('AA'+lastRow).getValue();
+	var value_clbal=sheet_Cashtally.getRange('AB'+lastRow).getValue();
+	//populating fields in Print sheet
+	sheet_Print.getRange('C9').setValue(value_date);
+	sheet_Print.getRange('C12').setValue(value_opbal);
+	sheet_Print.getRange('C13').setValue(value_sale);
+	sheet_Print.getRange('C14').setValue(value_osale);
+	sheet_Print.getRange('C15').setValue(value_gpay);
+	sheet_Print.getRange('C16').setValue(value_cheq);
+	sheet_Print.getRange('C17').setValue(value_cred);
+	sheet_Print.getRange('C18').setValue(value_expense);
+	sheet_Print.getRange('C19').setValue(value_sareechit);
+	sheet_Print.getRange('C20').setValue(value_bank1);
+	sheet_Print.getRange('C21').setValue(value_bank2);
+	sheet_Print.getRange('C22').setValue(value_bank3);
+	sheet_Print.getRange('C23').setValue(value_totalded);
+	sheet_Print.getRange('C24').setValue(value_clbal);
+	sheet_Print.getRange('C25').setValue(value_exc);
+	sheet_Print.getRange('E13').setValue(value_m2000);
+	sheet_Print.getRange('E14').setValue(value_m500);
+	sheet_Print.getRange('E15').setValue(value_m200);
+	sheet_Print.getRange('E16').setValue(value_m100);
+	sheet_Print.getRange('E17').setValue(value_m50);
+	sheet_Print.getRange('E18').setValue(value_m20);
+	sheet_Print.getRange('E19').setValue(value_m10);
+	sheet_Print.getRange('E20').setValue(value_m5);
+	sheet_Print.getRange('E21').setValue(value_m2);
+	sheet_Print.getRange('E22').setValue(value_m1);
+	sheet_Print.getRange('F23').setValue(value_ctr2);
+	sheet_Print.getRange('F24').setValue(value_totcur);
+	//calculating denominations
+	sheet_Print.getRange('F13').setValue((value_m2000)*2000);
+	sheet_Print.getRange('F14').setValue((value_m500)*500);
+	sheet_Print.getRange('F15').setValue((value_m200)*200);
+	sheet_Print.getRange('F16').setValue((value_m100)*100);
+	sheet_Print.getRange('F17').setValue((value_m50)*50);
+	sheet_Print.getRange('F18').setValue((value_m20)*20);
+	sheet_Print.getRange('F19').setValue((value_m10)*10);
+	sheet_Print.getRange('F20').setValue((value_m5)*5);
+	sheet_Print.getRange('F21').setValue((value_m2)*2);
+	sheet_Print.getRange('F22').setValue((value_m1)*1);
+};
+
+function dateformat() {
+  var spreadsheet = SpreadsheetApp.getActive();
+  spreadsheet.getRange('B2:B15').activate();
+  var currentCell = spreadsheet.getCurrentCell();
+  spreadsheet.getSelection().getNextDataRange(SpreadsheetApp.Direction.DOWN).activate();
+  currentCell.activateAsCurrentCell();
+  spreadsheet.getActiveRangeList().setNumberFormat('dd"-"mm"-"yyyy');
+};
+
+
+
+
+
+function exportSheetToPDF() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet();
+  var sheetName = "Print";
+  var targetSheet = sheet.getSheetByName(sheetName);
+  
+  if (!targetSheet) {
+    throw new Error("Sheet with name '" + sheetName + "' not found.");
+  }
+
+  var sheetId = targetSheet.getSheetId();
+  var ssId = sheet.getId();
+  var url = "https://docs.google.com/spreadsheets/d/" + ssId + "/export?format=pdf" +
+    "&size=A4" + // Paper size
+    "&portrait=true" + // Orientation
+    "&fitw=true" + // Fit to width
+    "&sheetnames=false&printtitle=false" +
+    "&pagenumbers=false" +
+    "&gridlines=false" +
+    "&fzr=false" +
+    "&gid=" + sheetId; // Sheet ID
+
+  var token = ScriptApp.getOAuthToken();
+  var response = UrlFetchApp.fetch(url, {
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  });
+  var date = new Date();
+  var pdfBlob = response.getBlob().setName(sheetName+"_"+ date + ".pdf");
+  var folder = DriveApp.getFolderById("_FOLDER_"); // Change to desired folder
+  var file = folder.createFile(pdfBlob);
+
+  return file.getUrl();
+}
+
+function getPDFUrl() {
+  return exportSheetToPDF();
+}
+
+function activateprintsheet() {
+  var spreadsheet = SpreadsheetApp.getActive();
+  spreadsheet.getRange('B14').activate();
+  spreadsheet.getSheetByName('Print').showSheet()
+  .activate();
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName('Print'), true);
+};
+
+function hidingsheet() {
+  var spreadsheet = SpreadsheetApp.getActive();
+  spreadsheet.getRange('K20').activate();
+  spreadsheet.getSheetByName('Print').hideSheet();
+};
+
+function settingdateinprint() {
+  var spreadsheet = SpreadsheetApp.getActive();
+  spreadsheet.getRange('D13').activate();
+  spreadsheet.getSheetByName('Print').showSheet()
+  .activate();
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName('Print'), true);
+  spreadsheet.getRange('C9').activate();
+  spreadsheet.getActiveRangeList().setNumberFormat('dd"-"mm"-"yyyy');
+};

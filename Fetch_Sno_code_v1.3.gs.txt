@@ -1,0 +1,25 @@
+function doGet(e) {
+    var ss=SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ss.getSheetByName('Cashtally');
+    //var sheetID=ss.getSheetId();
+    var data = sheet.getDataRange().getValues();
+    
+    var maxRecNo = -1; // Initialize to a value that is lower than any possible rec_no value
+
+    for (var i = 1; i < data.length; i++) {
+        var rec_no = data[i][0]; // Assuming rec_no is in the first column
+        if (rec_no > maxRecNo) {
+            maxRecNo = rec_no;
+        }
+    }
+    
+    return ContentService.createTextOutput(JSON.stringify({ success: true, result: { S_NO: maxRecNo } }))
+                          .setMimeType(ContentService.MimeType.JSON);
+}
+
+function formatDate(date) {
+    var day = ('0' + date.getDate()).slice(-2);
+    var month = ('0' + (date.getMonth() + 1)).slice(-2);
+    var year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}

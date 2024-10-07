@@ -1,0 +1,64 @@
+function backupNew() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet();
+  var backupFolder = DriveApp.getFolderById("YOUR_BACKUP_FolderID");  
+  var printFolder= DriveApp.getFolderById("YOUR_PRINT_FOLDER_ID");
+  var sheetName = sheet.getName();
+  var date = new Date();
+  var formattedDate = Utilities.formatDate(date, Session.getScriptTimeZone(), "dd-MM-yyyy");
+  var backupName = "Backup_" + date;
+
+  DriveApp.getFileById(sheet.getId()).makeCopy(backupName, backupFolder);
+  deleteOldBackups(backupFolder);
+  deleteprintfile(printFolder);
+
+  dateformater();
+  descendingdate();
+}
+
+function deleteOldBackups(folder) {
+  var files = folder.getFiles();
+  var now = new Date();
+  var days30 = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
+
+  while (files.hasNext()) {
+    var file = files.next();
+    var createdDate = file.getDateCreated();
+    
+    if ((now - createdDate) > days30) {
+      file.setTrashed(true);
+    }
+  }
+}
+
+function deleteprintfile(folder) {
+  var files = folder.getFiles();
+  var now = new Date();
+  var days1 = 1 * 24 * 60 * 60 * 1000; // 1 day in milliseconds
+
+  while (files.hasNext()) {
+    var file = files.next();
+    var createdDate = file.getDateCreated();
+    
+    if ((now - createdDate) > days1) {
+      file.setTrashed(true);
+    }
+  }
+}
+
+
+function dateformater() {
+  var spreadsheet = SpreadsheetApp.getActiveSheet();
+  var lastRow = spreadsheet.getLastRow(); 
+  spreadsheet.getRange('B2:B'+lastRow).activate();
+  var currentCell = spreadsheet.getCurrentCell();
+  spreadsheet.getSelection().getNextDataRange(SpreadsheetApp.Direction.DOWN).activate();
+  currentCell.activateAsCurrentCell();
+  spreadsheet.getActiveRangeList().setNumberFormat('dd"-"mm"-"yyyy');
+};
+
+function descendingdate() {
+  var spreadsheet = SpreadsheetApp.getActiveSheet();
+  var lastRow = spreadsheet.getLastRow(); 
+  spreadsheet.getRange('B2:B'+lastRow).activate()
+  .sort({column: 2, ascending: false});
+};
